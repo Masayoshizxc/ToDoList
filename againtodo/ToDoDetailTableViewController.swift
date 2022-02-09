@@ -14,7 +14,7 @@ class ToDoDetailTableViewController: UITableViewController {
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     
     var toDoItem : String!
-    var descripitem : String!
+    var descripItem : String!
     
     
     override func viewDidLoad() {
@@ -23,10 +23,12 @@ class ToDoDetailTableViewController: UITableViewController {
             toDoItem = ""
         }
         nameField.text = toDoItem
+        descriptionField.text = descripItem
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         toDoItem = nameField.text
+        descripItem = descriptionField.text
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {

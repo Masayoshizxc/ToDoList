@@ -25,6 +25,7 @@ class ToDoListViewController: UIViewController {
             let destination = segue.destination as! ToDoDetailTableViewController
             let selectedIndexPath = tableView.indexPathForSelectedRow!
             destination.toDoItem = toDoArray[selectedIndexPath.row]
+            destination.descripItem = descripArray[selectedIndexPath.row]
         }
         else{
             if let selectedIndexPath = tableView.indexPathForSelectedRow{
@@ -37,11 +38,13 @@ class ToDoListViewController: UIViewController {
         let source = segue.source as! ToDoDetailTableViewController
         if let selectedIndexPath = tableView.indexPathForSelectedRow{
             toDoArray[selectedIndexPath.row] = source.toDoItem
+            descripArray[selectedIndexPath.row] = source.descripItem
             tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
         }
         else{
             let newIndexPath = IndexPath(row: toDoArray.count, section: 0)
             toDoArray.append(source.toDoItem)
+            descripArray.append(source.descripItem)
             tableView.insertRows(at: [newIndexPath], with: .bottom)
             tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
         }
@@ -70,6 +73,7 @@ extension ToDoListViewController : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = toDoArray[indexPath.row]
+        cell.detailTextLabel?.text = descripArray[indexPath.row]
         return cell
     }
     
