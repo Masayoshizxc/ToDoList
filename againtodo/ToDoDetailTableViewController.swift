@@ -14,6 +14,7 @@ class ToDoDetailTableViewController: UITableViewController {
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     
     var toDoItem : String!
+    var descripitem : String!
     
     
     override func viewDidLoad() {

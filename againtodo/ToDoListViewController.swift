@@ -13,7 +13,7 @@ class ToDoListViewController: UIViewController {
     
     @IBOutlet weak var addButton: UIButton!
     var toDoArray = [String]()
-    
+    var descripArray = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
