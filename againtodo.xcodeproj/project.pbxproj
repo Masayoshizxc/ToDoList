@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE23E14527B941EC006CC1C7 /* StopWatchFirstPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE23E14427B941EC006CC1C7 /* StopWatchFirstPage.swift */; };
 		AE57D97B27B41BDE0027E961 /* ToDoDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE57D97A27B41BDE0027E961 /* ToDoDetailTableViewController.swift */; };
 		AE880AF927B44440005E093E /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE880AF827B44440005E093E /* ListTableViewCell.swift */; };
 		AEA7E7C627B4091D00069751 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA7E7C527B4091D00069751 /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE23E14427B941EC006CC1C7 /* StopWatchFirstPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchFirstPage.swift; sourceTree = "<group>"; };
 		AE57D97A27B41BDE0027E961 /* ToDoDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ToDoDetailTableViewController.swift; sourceTree = "<group>"; };
 		AE880AF827B44440005E093E /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		AEA7E7C227B4091D00069751 /* againtodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = againtodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +66,7 @@
 				AEA7E7C727B4091D00069751 /* SceneDelegate.swift */,
 				AEA7E7C927B4091D00069751 /* ToDoListViewController.swift */,
 				AEA7E7CB27B4091D00069751 /* Main.storyboard */,
+				AE23E14427B941EC006CC1C7 /* StopWatchFirstPage.swift */,
 				AE880AF827B44440005E093E /* ListTableViewCell.swift */,
 				AE57D97A27B41BDE0027E961 /* ToDoDetailTableViewController.swift */,
 				AEA7E7CE27B4091E00069751 /* Assets.xcassets */,
@@ -149,6 +152,7 @@
 				AE57D97B27B41BDE0027E961 /* ToDoDetailTableViewController.swift in Sources */,
 				AEA7E7C827B4091D00069751 /* SceneDelegate.swift in Sources */,
 				AE880AF927B44440005E093E /* ListTableViewCell.swift in Sources */,
+				AE23E14527B941EC006CC1C7 /* StopWatchFirstPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

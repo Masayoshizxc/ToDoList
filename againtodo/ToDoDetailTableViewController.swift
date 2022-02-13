@@ -32,7 +32,7 @@ class ToDoDetailTableViewController: UITableViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
-        let isPresentingAddMode = presentingViewController is UINavigationController
+        let isPresentingAddMode = presentingViewController is UITabBarController
         if isPresentingAddMode{
             dismiss(animated: true, completion: nil)
         }else{
