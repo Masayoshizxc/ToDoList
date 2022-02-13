@@ -16,19 +16,34 @@ class StopWatchFirstPage: UIViewController {
     var timerCounting:Bool = false
     var clickCheck:Int = 0
     var timerLabel = UILabel()
+    let viewChange = UIView()
+    var imageTimer = UIImageView()
+    var imageStop = UIImageView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemYellow
+        imageTimer.frame = CGRect(x: 154, y: 51.5, width: 100, height: 100)
+        imageTimer.image = UIImage(systemName: "timer")
+        imageTimer.tintColor = .black
         
-        
-        
+        imageStop.frame = CGRect(x: 154, y: 51.5, width: 100, height: 100)
+        imageStop.image = UIImage(systemName: "stopwatch")
+        imageStop.tintColor = .black
+        view.addSubview(imageTimer)
+        view.addSubview(imageStop)
         switchTime.insertSegment(withTitle: "Timer", at: 0, animated: true)
         switchTime.insertSegment(withTitle: "StopWatch", at: 1, animated: true)
-        view.backgroundColor = .systemYellow
+        switchTime.selectedSegmentIndex = 0
         
         
         
         switchTime.frame = CGRect(x: 104, y: 164, width: 206,height: 32)
         view.addSubview(switchTime)
+        viewChange.frame = CGRect(x: 0, y: 201, width: 414, height: 500)
+        viewChange.backgroundColor = .white
+        
+        
         
         
         timerLabel.text = "00:00:00"
@@ -36,24 +51,10 @@ class StopWatchFirstPage: UIViewController {
         timerLabel.textAlignment = .center
         timerLabel.frame = CGRect(x: 0, y: 235, width: 414, height: 85)
         view.addSubview(timerLabel)
-        Images()
+        containerPreparing(switchTime)
+        switchTime.addTarget(self, action: #selector(containerPreparing(_:)), for: .valueChanged)
         Buttons()
         
-    }
-    func Images(){
-        var imageTimer = UIImageView()
-        
-        imageTimer.frame = CGRect(x: 154, y: 51.5, width: 100, height: 100)
-        imageTimer.image = UIImage(systemName: "timer")
-        imageTimer.tintColor = .black
-        var imageStop = UIImageView()
-        
-        imageStop.isHidden = true
-        imageStop.frame = CGRect(x: 154, y: 51.5, width: 100, height: 100)
-        imageStop.image = UIImage(systemName: "stopwatch")
-        imageStop.tintColor = .black
-        view.addSubview(imageTimer)
-        view.addSubview(imageStop)
     }
     func Buttons() {
         let resetButton = UIButton()
@@ -122,8 +123,24 @@ class StopWatchFirstPage: UIViewController {
     }
     
 //************************************************************************************************************************************************
+    @objc func containerPreparing(_ segmentedControl: UISegmentedControl){
+        
+        
+        if segmentedControl.selectedSegmentIndex == 0{
+            imageStop.isHidden = true
+            imageTimer.isHidden = false
+            viewChange.isHidden = true
+            
+        }
+        else{
+            imageTimer.isHidden = true
+            imageStop.isHidden = false
+            viewChange.isHidden = false
+            
+            
+        }
+    }
     
-    let viewChange = UIView()
     
     
 }
