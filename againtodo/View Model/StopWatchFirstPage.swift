@@ -55,6 +55,7 @@ class StopWatchFirstPage: UIViewController {
         switchTime.addTarget(self, action: #selector(containerPreparing(_:)), for: .valueChanged)
         Buttons()
         
+       
     }
     func Buttons() {
         let resetButton = UIButton()
@@ -133,6 +134,7 @@ class StopWatchFirstPage: UIViewController {
             
         }
         else{
+            
             imageTimer.isHidden = true
             imageStop.isHidden = false
             viewChange.isHidden = false

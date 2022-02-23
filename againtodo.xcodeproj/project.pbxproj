@@ -43,6 +43,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE96474227C6A48E00E100CA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7E7CB27B4091D00069751 /* Main.storyboard */,
+				AEA7E7D027B4091E00069751 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		AE96474327C6AA5700E100CA /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7E7C927B4091D00069751 /* ToDoListViewController.swift */,
+				AE23E14427B941EC006CC1C7 /* StopWatchFirstPage.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		AE96474427C6AA6600E100CA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AE57D97A27B41BDE0027E961 /* ToDoDetailTableViewController.swift */,
+				AE880AF827B44440005E093E /* ListTableViewCell.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		AEA7E7B927B4091D00069751 = {
 			isa = PBXGroup;
 			children = (
@@ -64,13 +91,10 @@
 			children = (
 				AEA7E7C527B4091D00069751 /* AppDelegate.swift */,
 				AEA7E7C727B4091D00069751 /* SceneDelegate.swift */,
-				AEA7E7C927B4091D00069751 /* ToDoListViewController.swift */,
-				AEA7E7CB27B4091D00069751 /* Main.storyboard */,
-				AE23E14427B941EC006CC1C7 /* StopWatchFirstPage.swift */,
-				AE880AF827B44440005E093E /* ListTableViewCell.swift */,
-				AE57D97A27B41BDE0027E961 /* ToDoDetailTableViewController.swift */,
+				AE96474327C6AA5700E100CA /* View Model */,
+				AE96474227C6A48E00E100CA /* Storyboards */,
+				AE96474427C6AA6600E100CA /* Model */,
 				AEA7E7CE27B4091E00069751 /* Assets.xcassets */,
-				AEA7E7D027B4091E00069751 /* LaunchScreen.storyboard */,
 				AEA7E7D327B4091E00069751 /* Info.plist */,
 			);
 			path = againtodo;
