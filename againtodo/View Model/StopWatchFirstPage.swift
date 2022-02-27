@@ -1,148 +1,149 @@
-//
-//  StopWatchFirstPage.swift
-//  againtodo
-//
-//  Created by Adilet on 13/2/22.
-//
-
 import UIKit
 
-class StopWatchFirstPage: UIViewController {
-    let icon = UIButton()
-//    icon.setBackgroundImage("timer.circle.fill", for: normal)
-    let switchTime = UISegmentedControl()
-    var timer:Timer = Timer()
-    var count:Int = 0
-    var timerCounting:Bool = false
-    var clickCheck:Int = 0
-    var timerLabel = UILabel()
-    let viewChange = UIView()
-    var imageTimer = UIImageView()
-    var imageStop = UIImageView()
+struct StopWatchViewModel {
+    var model = StopWatchModel(hour: 0, min: 0, sec: 0, secClick: 0, minClick : 0, hourClick : 0,clicker : 0,  timerFor: [])
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemYellow
-        imageTimer.frame = CGRect(x: 154, y: 51.5, width: 100, height: 100)
-        imageTimer.image = UIImage(systemName: "timer")
-        imageTimer.tintColor = .black
-        
-        imageStop.frame = CGRect(x: 154, y: 51.5, width: 100, height: 100)
-        imageStop.image = UIImage(systemName: "stopwatch")
-        imageStop.tintColor = .black
-        view.addSubview(imageTimer)
-        view.addSubview(imageStop)
-        switchTime.insertSegment(withTitle: "Timer", at: 0, animated: true)
-        switchTime.insertSegment(withTitle: "StopWatch", at: 1, animated: true)
-        switchTime.selectedSegmentIndex = 0
-        
-        
-        
-        switchTime.frame = CGRect(x: 104, y: 164, width: 206,height: 32)
-        view.addSubview(switchTime)
-        viewChange.frame = CGRect(x: 0, y: 201, width: 414, height: 500)
-        viewChange.backgroundColor = .white
-        
-        
-        
-        
-        timerLabel.text = "00:00:00"
-        timerLabel.font = UIFont.boldSystemFont(ofSize: 70)
-        timerLabel.textAlignment = .center
-        timerLabel.frame = CGRect(x: 0, y: 235, width: 414, height: 85)
-        view.addSubview(timerLabel)
-        containerPreparing(switchTime)
-        switchTime.addTarget(self, action: #selector(containerPreparing(_:)), for: .valueChanged)
-        Buttons()
-        
-       
-    }
-    func Buttons() {
-        let resetButton = UIButton()
-//        resetButton.backgroundColor = .blue
-        resetButton.tintColor = .black
-        resetButton.setBackgroundImage(UIImage(systemName: "square.circle.fill"), for: .normal)
-        resetButton.frame = CGRect(x: 66, y: 605, width: 80, height: 70)
-        resetButton.addTarget(self, action: #selector(resetTapped), for: .touchUpInside)
-        view.addSubview(resetButton)
-        
-        let stopButton = UIButton()
-//        stopButton.backgroundColor = .orange
-        stopButton.tintColor = .black
-        stopButton.setBackgroundImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
-        stopButton.frame = CGRect(x: 173, y: 605, width: 80, height: 70)
-        stopButton.addTarget(self, action: #selector(stopTapped), for: .touchUpInside)
-        view.addSubview(stopButton)
-        
-        let startButton = UIButton()
-//        startButton.backgroundColor = .yellow
-        startButton.tintColor = .black
-        startButton.setBackgroundImage(UIImage(systemName: "play.circle.fill"), for: .normal)
-        startButton.frame = CGRect(x: 278.5, y: 605, width: 80, height: 70)
-        startButton.addTarget(self, action: #selector(startTapped), for: .touchUpInside)
-        view.addSubview(startButton)
-    }
-    @IBAction func resetTapped() {
-        clickCheck = 0
-        
-        self.count = 0
-        self.timer.invalidate()
-        self.timerLabel.text = self.makeTimeString(hours: 0, minutes: 0, seconds: 0)
+    mutating func timerUpdated(pickerView: UIPickerView, label: UILabel, timer: Timer) {
+        if model.clicker == 0 {
+            model.sec += 1
+            if model.min == 59 && model.sec == 60 {
+                model.min = 0
+                model.sec = 0
+                model.hour += 1
+            }else if model.sec == 60 {
+                model.sec = 0
+                model.min += 1
+            }
+        } else if model.clicker == 1 && model.sec != 0 || model.min != 0 || model.hour != 0{
+            if model.min == 0 && model.sec == 0 {
+                model.min = 59
+                model.sec = 60
+                model.hour -= 1
+            }else if model.sec == 0 {
+                model.sec = 60
+                model.min -= 1
+            }
+            model.sec -= 1
+        } else {
+            timer.invalidate()
+            pickerView.isHidden = false
+            pickerView.selectRow(0, inComponent: 0, animated: false)
+            pickerView.selectRow(0, inComponent: 1, animated: false)
+            pickerView.selectRow(0, inComponent: 2, animated: false)
+        }
+        conditions(label: label)
     }
     
-    @IBAction func stopTapped() {
-        clickCheck = 0
-        timerCounting = false
+    func conditions(label: UILabel) {
+        if model.min >= 10 && model.sec >= 10 && model.hour >= 10 {
+            label.text = "\(model.hour):\(model.min):\(String(model.sec))"
+        }else if model.hour >= 10 && model.sec >= 10{
+            label.text = "\(model.hour):0\(model.min):\(String(model.sec))"
+        }else if model.hour >= 10 && model.min >= 10{
+            label.text = "\(model.hour):\(model.min):0\(String(model.sec))"
+        }else if model.hour >= 10{
+            label.text = "\(model.hour):0\(model.min):0\(String(model.sec))"
+        }else if model.min >= 10 && model.sec >= 10{
+            label.text = "0\(model.hour):\(model.min):\(String(model.sec))"
+        }else if model.min >= 10  {
+            label.text = "0\(model.hour):\(model.min):0\(String(model.sec))"
+        }else if model.sec >= 10 {
+            label.text = "0\(model.hour):0\(model.min):\(String(model.sec))"
+        } else {
+            label.text = "0\(model.hour):0\(model.min):0\(String(model.sec))"
+        }
+    }
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.tintColor = .black
+        imageView.image = UIImage(systemName: "timer")
+        return imageView
+    }()
+    mutating func segmentedValueHasChanged(sender: UISegmentedControl, pickerView: UIPickerView, label: UILabel, timer: Timer){
+        if sender.selectedSegmentIndex == 1 {
+            pickerView.isHidden = false
+            model.hour = 0
+            model.min = 0
+            model.sec = 0
+            
+            model.clicker = 1
+            label.text = "00:00:00"
+            timer.invalidate()
+            
+            imageView.image = UIImage(systemName: "stopwatch")
+        } else if sender.selectedSegmentIndex == 0 {
+            pickerView.isHidden = true
+            model.hour = 0
+            model.min = 0
+            model.sec = 0
+
+            model.clicker = 0
+            label.text = "00:00:00"
+            timer.invalidate()
+            
+            imageView.image = UIImage(systemName: "timer")
+        }
+    }
+    
+    mutating func startButtonTapped(pickerView: UIPickerView, timer: Timer) {
         timer.invalidate()
-        
-    }
-    @IBAction func startTapped(){
-        if(clickCheck==0){
-        timerCounting = true
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)}
-        clickCheck += 1
-    }
-    @objc func timerCounter() -> Void{
-        count += 1
-        let time = secondsToHoursMinutesSeconds(seconds: count)
-        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
-        timerLabel.text = timeString
-    }
-    
-    func secondsToHoursMinutesSeconds(seconds: Int) -> (Int, Int, Int){
-        return ((seconds/3600),((seconds%3600)/60),((seconds%3600)%60))
-    }
-    
-    func makeTimeString(hours:Int, minutes:Int, seconds:Int) -> String{
-        var timeString = ""
-        timeString += String(format: "%02d", hours)
-        timeString += ":"
-        timeString += String(format: "%02d", minutes)
-        timeString += ":"
-        timeString += String(format: "%02d", seconds)
-        return timeString
-    }
-    
-//************************************************************************************************************************************************
-    @objc func containerPreparing(_ segmentedControl: UISegmentedControl){
-        
-        
-        if segmentedControl.selectedSegmentIndex == 0{
-            imageStop.isHidden = true
-            imageTimer.isHidden = false
-            viewChange.isHidden = true
-            
+
+        if model.clicker == 1 {
+            pickerView.isHidden = true
+            model.hour = model.hourClick
+            model.min = model.minClick
+            model.sec = model.secClick
         }
-        else{
+        
+    }
+    
+    mutating func stopButtonTapped(pickerView: UIPickerView, timer: Timer) {
+        timer.invalidate()
+
+        if model.clicker == 1 {
+            pickerView.isHidden = false
             
-            imageTimer.isHidden = true
-            imageStop.isHidden = false
-            viewChange.isHidden = false
+            pickerView.selectRow(model.hour, inComponent: 0, animated: true)
+            pickerView.selectRow(model.min, inComponent: 1, animated: true)
+            pickerView.selectRow(model.sec, inComponent: 2, animated: true)
             
-            
+            model.hourClick = model.hour
+            model.minClick = model.min
+            model.secClick = model.sec
         }
     }
     
+    mutating func restartButtonTapped(pickerView: UIPickerView, label: UILabel, timer: Timer) {
+        timer.invalidate()
+
+        if model.clicker == 1 {
+            pickerView.isHidden = false
+        }
+        
+        pickerView.selectRow(0, inComponent: 0, animated: true)
+        pickerView.selectRow(0, inComponent: 1, animated: true)
+        pickerView.selectRow(0, inComponent: 2, animated: true)
+        model.sec = 0
+        model.min = 0
+        model.hour = 0
+        
+        model.hourClick = 0
+        model.minClick = 0
+        model.secClick = 0
+        
+        label.text = "00:00:00"
+    }
     
+    mutating func pickerViewUpdated(val1: String, val2: String, val3: String) {
+        model.hourClick = Int(val1) ?? 0
+        model.minClick = Int(val2) ?? 0
+        model.secClick = Int(val3) ?? 0
+    }
     
+    mutating func lazy() -> [String]{
+        for i in 0...59 {
+            model.timerFor.append(String(i))
+        }
+        return model.timerFor
+    }
 }

@@ -260,7 +260,7 @@
         <!--StopWatch-->
         <scene sceneID="8xY-LT-xrU">
             <objects>
-                <viewController id="xKX-A6-4XS" customClass="StopWatchFirstPage" customModule="againtodo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xKX-A6-4XS" customClass="AllView" customModule="againtodo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B67-U4-9hV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

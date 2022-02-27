@@ -1,10 +1,3 @@
-//
-//  ToDoDetailTableViewController.swift
-//  againtodo
-//
-//  Created by Adilet on 9/2/22.
-//
-
 import UIKit
 
 class ToDoDetailTableViewController: UITableViewController {
